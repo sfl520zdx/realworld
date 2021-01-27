@@ -1,4 +1,5 @@
-export default function({ $axios, redirect, store }) {
+export default function ({ $axios, redirect, store }) {
+  // 使用托管的基础api
   $axios.defaults.baseURL = 'https://conduit.productionready.io/api';
 
   $axios.onRequest(config => {

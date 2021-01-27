@@ -18,6 +18,8 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/markdownit',
+    'cookieparser',
+    'js-cookie'
   ],
 
   plugins: [
@@ -27,5 +29,9 @@ module.exports = {
   markdownit: {
     injected: true
   },
-
+  //配置服务器环境
+  server: {
+    host: '0.0.0.0',//为了对外访问，就需要设置成0.0.0.0
+    port: 3000
+  }
 }

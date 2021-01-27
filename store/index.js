@@ -1,23 +1,23 @@
 import Vuex from 'vuex';
 import axios from 'axios';
-
+import jsCookie from 'js-cookie'
+import cookieparser from 'cookieparser'
 const createStore = () => {
   return new Vuex.Store({
 
     state: {
-      user: getUserFromLocalStorage(),
+      user: getUserFromCookie(),
     },
 
     mutations: {
-      setUser(state, user) {
-        localStorage.setItem('user', JSON.stringify(user));
+      setUser (state, user) {
+        jsCookie.set('user', user)
         state.user = user;
-        setAxiosAuthHeader(user);
       },
     },
 
     getters: {
-      user(state) {
+      user (state) {
         return state.user;
       }
     },
@@ -27,22 +27,13 @@ const createStore = () => {
 
 export default createStore;
 
-function getUserFromLocalStorage() {
+function getUserFromCookie () {
   let user = null;
   try {
-    user = JSON.parse(localStorage.getItem('user'));
-    setAxiosAuthHeader(user);
+    user = JSON.parse(jsCookie.get('user'));
     return user;
   } catch (ex) {
-    localStorage.setItem('user', null);
+    jsCookie.set('user', null);
     return null;
   }
-}
-
-function setAxiosAuthHeader(user) {
-  // if (user && user.token) {
-  //   axios.defaults.headers.common['Authorization'] = `Token ${user.token}`;
-  // } else {
-  //   delete axios.defaults.headers.common['Authorization'];
-  // }
 }

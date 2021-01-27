@@ -1,14 +1,15 @@
 <template>
-<div>
-  <nav-bar></nav-bar>
-  <nuxt/>
-  <a href="https://github.com/anishkny/realworld-nuxt" id="forkOnGH">
-    <i class="ion-social-github"></i>&nbsp;&nbsp;Fork on GitHub</a>
-</div>
+  <div>
+    <nav-bar></nav-bar>
+    <nuxt />
+    <a href="https://github.com/anishkny/realworld-nuxt" id="forkOnGH">
+      <i class="ion-social-github"></i>&nbsp;&nbsp;Fork on GitHub</a
+    >
+  </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar';
+import NavBar from '@/components/NavBar'
 
 export default {
   components: {
@@ -29,6 +30,6 @@ export default {
   z-index: 999;
   color: #fff;
   font-size: 1.5rem;
-  display: block
+  display: block;
 }
 </style>
