@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: centos-latest
     steps:
       # 下载源码
       - name: Checkout
@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@master
       - run: npm install
       - run: npm run build
-      - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
+      - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json
 
       # 发布 Release
       - name: Create Release
@@ -44,6 +44,7 @@ jobs:
           asset_content_type: application/x-tgz
 
       # 部署到服务器
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -52,8 +53,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/realworld
+            cd /root/realworld
             wget https://github.com/sfl520zdx/realworld/releases/latest/download/release.tgz -O release.tgz
             tar zxvf release.tgz
             npm install --production
-            pm2 reload pm2.config.js
+            pm2 reload pm2.config.json
